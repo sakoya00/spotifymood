@@ -1,25 +1,21 @@
 from bs4 import BeautifulSoup
 import pandas as pd
 import requests
-import re
 from time import sleep
 from datetime import date, timedelta
-from random import randint
+
+#create empty arrays for data we're collecting
+dates=[]
+url_list=[]
+final = []
 
 #map site
 
 url = "https://spotifycharts.com/regional/us/daily/"
-start_date= date(2020, 1, 1)
-end_date= date(2020, 1, 2)
+start_date= date(2019, 9, 1)
+end_date= date(2020, 9, 1)
 
 delta= end_date-start_date
-dates=[]
-url_list=[]
-artist_list=[]
-title_list=[]
-id_list= []
-url_date_ls=[]
-final = []
 
 for i in range(delta.days+1):
 	day = start_date+timedelta(days=i)
@@ -33,22 +29,24 @@ def add_url():
 
 add_url()
 
+#function for going through each row in each url and finding relevant song info
+
 def song_scrape(x):
     pg = x
     for tr in songs.find("tbody").findAll("tr"):
         artist= tr.find("td", {"class": "chart-table-track"}).find("span").text
         artist= artist.replace("by ","").strip()
-        artist_list.append(artist)
-
+  
         title= tr.find("td", {"class": "chart-table-track"}).find("strong").text
-        title_list.append(title)
-
+ 
         songid= tr.find("td", {"class": "chart-table-image"}).find("a").get("href")
         songid= songid.split("track/")[1]
-        id_list.append(songid)
-        
+    
         url_date= x.split("daily/")[1]
-        url_date_ls.append(url_date)
+        
+        final.append([title, artist, songid, url_date])
+	
+#loop through urls to create array of all of our song info
 
 for u in url_list:
     read_pg= requests.get(u)
@@ -56,8 +54,12 @@ for u in url_list:
     soup= BeautifulSoup(read_pg.text, "html.parser")
     songs= soup.find("table", {"class":"chart-table"})
     song_scrape(u)
-    final.append([title_list, artist_list, id_list, url_date_ls])
-    
+ 
+#convert to data frame with pandas for easier data manipulation
+
 final_df = pd.DataFrame(final, columns= ["Title", "Artist", "Song ID", "Chart Date"])
-with open('spscrape3.csv', 'w') as f:
-        final_df.to_csv(f, header=False, index=False)
+
+#write to csv
+
+with open('spmooddata.csv', 'w') as f:
+        final_df.to_csv(f, header= True, index=False)
