@@ -1,21 +1,25 @@
 from bs4 import BeautifulSoup
 import pandas as pd
-import urllib.request
-#import urllib2
+import requests
 import re
 from time import sleep
-from datetime import data, timedelta
+from datetime import date, timedelta
 from random import randint
 
 #map site
 
 url = "https://spotifycharts.com/regional/us/daily/"
-startdate= date(2020, 1, 1)
-enddate= date(2020, 9, 1)
+start_date= date(2020, 1, 1)
+end_date= date(2020, 1, 2)
 
 delta= end_date-start_date
 dates=[]
 url_list=[]
+artist_list=[]
+title_list=[]
+id_list= []
+url_date_ls=[]
+final = []
 
 for i in range(delta.days+1):
 	day = start_date+timedelta(days=i)
@@ -27,36 +31,33 @@ def add_url():
 		c_string = url+date
 		url_list.append(c_string)
 
+add_url()
+
+def song_scrape(x):
+    pg = x
+    for tr in songs.find("tbody").findAll("tr"):
+        artist= tr.find("td", {"class": "chart-table-track"}).find("span").text
+        artist= artist.replace("by ","").strip()
+        artist_list.append(artist)
+
+        title= tr.find("td", {"class": "chart-table-track"}).find("strong").text
+        title_list.append(title)
+
+        songid= tr.find("td", {"class": "chart-table-image"}).find("a").get("href")
+        songid= songid.split("track/")[1]
+        id_list.append(songid)
+        
+        url_date= x.split("daily/")[1]
+        url_date_ls.append(url_date)
+
 for u in url_list:
-read_pg= urllib.request.urlopen(u).read()
-soup=BeautifulSoup(read_pg, "html.parser")
-html = response.read().decode('utf-8')
-
-#scrape songs
-songs= soup.find("table", {"title":"chart-table"})
-
-def songs(x):
-pg = x
-artist_list=[]
-title_list=[]
-id_list= []
-url_date=[]
-for row in songs.findAll("tr"):
-
-artist= tr.find("td", {"class": "chart-table-track"}).find("span").text
-artist= artist.replace("by ","").strip()
-artist_list.append(artist)
-
-title= tr.find("td", {"class": "chart-table-track"}).find("strong").text
-title_list.append(title)
-
-id= tr.find("td", {"class": "chart-table-image"}).find("a").get("href")
-id=url.split("track/")[1]
-id_list.append(id)
-##song_date= re.search("<script>(.*)</script>", html")
-
-
-
-final = []
-final.append([title_list, artist_list, id_list, #date])
-final_df = pd.DataFrame()
+    read_pg= requests.get(u)
+    sleep(2)
+    soup= BeautifulSoup(read_pg.text, "html.parser")
+    songs= soup.find("table", {"class":"chart-table"})
+    song_scrape(u)
+    final.append([title_list, artist_list, id_list, url_date_ls])
+    
+final_df = pd.DataFrame(final, columns= ["Title", "Artist", "Song ID", "Chart Date"])
+with open('spscrape3.csv', 'w') as f:
+        final_df.to_csv(f, header=False, index=False)
