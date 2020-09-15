@@ -16,7 +16,7 @@ songidparsed= songidcol2["Song ID"]
 def get_concat_query(k=0, concatls=[]):
     concatpre=[]
     for i in range (0, len(songidparsed)):
-        while i<10+10*k:
+        while i<100+100*k:
             songidval= songidparsed.get(str(i))
             concatpre.append(songidval)
             joined= ",".join(concatpre))
