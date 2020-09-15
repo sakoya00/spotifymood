@@ -18,7 +18,8 @@ def get_concat_query(k=0, concatls=[]):
         while i<10+10*k:
             songidval= songidparsed.get(str(i))
             concatpre.append(songidval)
-        concatls.append(",".join(concatpre))
+            joined= ",".join(concatpre))
+        concatls.append(joined)
         k=k+1
         get_concat_query(k, concatls)
             
