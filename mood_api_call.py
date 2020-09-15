@@ -7,10 +7,10 @@ with open("spmooddata.csv", 'rb') as rawdata:
     result = chardet.detect(rawdata.read(100000))
 result
 #{'encoding': 'Windows-1252', 'confidence': 0.73, 'language': ''}
-df= pd.read_csv(r"spmooddata.csv", encoding= "Windows-1252")
+df= pd.read_csv(r"spmooddata.csv", encoding= "Windows-1252", usecols="Song ID")
 songidcol= df.to_json()
-json.dump(songidcol)
-songidparsed= songidcol["Song ID"]
+songidcol2= json.dump(songidcol)
+songidparsed= songidcol2["Song ID"]
 
 def get_concat_query(k=0, concatls=[]):
     concatpre=[]
