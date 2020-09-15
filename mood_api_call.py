@@ -1,4 +1,6 @@
 import chardet
+import csv
+import pandas as pd
 with open("spmooddata.csv", 'rb') as rawdata:
     result = chardet.detect(rawdata.read(100000))
 result
