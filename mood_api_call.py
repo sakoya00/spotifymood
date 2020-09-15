@@ -9,7 +9,7 @@ result
 #{'encoding': 'Windows-1252', 'confidence': 0.73, 'language': ''}
 df= pd.read_csv(r"spmooddata.csv", encoding= "Windows-1252", usecols="Song ID")
 songidcol= df.to_json()
-songidcol2= json.dump(songidcol)
+songidcol2= json.dumps(songidcol)
 songidparsed= songidcol2["Song ID"]
 
 def get_concat_query(k=0, concatls=[]):
