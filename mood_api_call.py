@@ -105,6 +105,6 @@ audioresponses=list()
 for concatid in concatls:
     #should "i" below actually be "concatid?"
     audiojson= client.get_resource(batch_id=concatls[i])
-    responses.append(audiojson)
+    audioresponses.append(audiojson)
 #i=0
 #client.get_resource(batch_id=concatls[i])
