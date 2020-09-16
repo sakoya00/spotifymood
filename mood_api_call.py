@@ -1,5 +1,6 @@
 import chardet
 import csv
+import ast
 import requests
 import json
 import pandas as pd
@@ -10,8 +11,9 @@ result
 df= pd.read_csv(r"spmooddata.csv", encoding= "Windows-1252")
 df= pd.DataFrame(df, columns=["Song ID"])
 songidcol= df.to_json()
+songidcol2= ast.literal_eval(songidcol)
 #songidcol2= json.dumps(songidcol)
-songidparsed= songidcol["Song ID"]
+songidparsed= songidcol2["Song ID"]
 
 def get_concat_query(k=0, concatls=[]):
     concatpre=[]
