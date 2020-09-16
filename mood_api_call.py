@@ -81,19 +81,10 @@ class SpotifyAPI(object):
         return headers
         
         
-    def get_resource(self, lookup_id, resource_type='albums', version='v1'):
-        endpoint = f"https://api.spotify.com/{version}/{resource_type}/{lookup_id}"
+    def get_resource(self, batch_id, resource_type='audio-features', version='v1'):
+        endpoint = f"https://api.spotify.com/{version}/{resource_type}/?ids={batch_id}"
         headers = self.get_resource_header()
         r = requests.get(endpoint, headers=headers)
         if r.status_code not in range(200, 299):
-            return {}
-        return r.json()
-
-    def base_search(self, query_params): # type
-        headers = self.get_resource_header()
-        endpoint = "https://api.spotify.com/v1/search"
-        lookup_url = f"{endpoint}?{query_params}"
-        r = requests.get(lookup_url, headers=headers)
-        if r.status_code not in range(200, 299):  
             return {}
         return r.json()
