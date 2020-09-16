@@ -14,31 +14,18 @@ songidcol= df.to_json()
 songidcol2= ast.literal_eval(songidcol)
 #songidcol2= json.dumps(songidcol)
 songidparsed= songidcol2["Song ID"]
-
-k=0
-concatls=[]
-concatpre=[]
-for i in range (0, 20):
-    if i<10+10*k:
-        songidval= songidparsed.get(str(i))
-        concatpre.append(songidval)
-        joined= ",".join(concatpre)
-        if i%10==9:
-            concatls.append(joined)
-            concatpre=[]
-    k=k+1
-"""
-def get_concat_query(k=0, concatls=[]):
-    concatpre=[]
+    
+def get_concat_query(k=0, concatls=[], concatpre=[]):
     for i in range (0, len(songidparsed)):
-        while i<100+100*k:
+        if i<100+100*k:
             songidval= songidparsed.get(str(i))
             concatpre.append(songidval)
             joined= ",".join(concatpre)
-        concatls.append(joined)
+            if i%100==99:
+                concatls.append(joined)
+                concatpre=[]
         k=k+1
-        get_concat_query(k, concatls)
-"""         
+        
 #songidcol= pd.DataFrame(df, columns= ["Song ID"])
 #n= 50
 #songidsub= [ songidcol[i:i+n] for i in range(0, len(songidcol), n) ]
