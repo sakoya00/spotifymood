@@ -100,3 +100,6 @@ client.get_token_data()
 client.perform_auth()
 client.get_access_token()
 client.get_resource_header()
+
+#i=0
+#client.get_resource(batch_id=concatls[i])
