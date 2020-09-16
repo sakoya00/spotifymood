@@ -10,8 +10,8 @@ result
 df= pd.read_csv(r"spmooddata.csv", encoding= "Windows-1252")
 df= pd.DataFrame(df, columns=["Song ID"])
 songidcol= df.to_json()
-songidcol2= json.dumps(songidcol)
-songidparsed= songidcol2["Song ID"]
+#songidcol2= json.dumps(songidcol)
+songidparsed= songidcol["Song ID"]
 
 def get_concat_query(k=0, concatls=[]):
     concatpre=[]
