@@ -88,3 +88,15 @@ class SpotifyAPI(object):
         if r.status_code not in range(200, 299):
             return {}
         return r.json()
+    
+#Fill in client_id and client_secret
+client_id= ""
+client_secret= ""
+
+client= SpotifyAPI(client_id, client_secret)
+client.get_client_credentials()
+client.get_token_headers()
+client.get_token_data()
+client.perform_auth()
+client.get_access_token()
+client.get_resource_header()
