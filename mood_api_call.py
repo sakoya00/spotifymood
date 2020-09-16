@@ -88,13 +88,7 @@ class SpotifyAPI(object):
         if r.status_code not in range(200, 299):
             return {}
         return r.json()
-    
-    def get_album(self, _id):
-        return self.get_resource(_id, resource_type='albums')
-    
-    def get_artist(self, _id):
-        return self.get_resource(_id, resource_type='artists')
-    
+
     def base_search(self, query_params): # type
         headers = self.get_resource_header()
         endpoint = "https://api.spotify.com/v1/search"
@@ -103,17 +97,3 @@ class SpotifyAPI(object):
         if r.status_code not in range(200, 299):  
             return {}
         return r.json()
-    
-    def search(self, query=None, operator=None, operator_query=None, search_type='artist' ):
-        if query == None:
-            raise Exception("A query is required")
-        if isinstance(query, dict):
-            query = " ".join([f"{k}:{v}" for k,v in query.items()])
-        if operator != None and operator_query != None:
-            if operator.lower() == "or" or operator.lower() == "not":
-                operator = operator.upper()
-                if isinstance(operator_query, str):
-                    query = f"{query} {operator} {operator_query}"
-        query_params = urlencode({"q": query, "type": search_type.lower()})
-        print(query_params)
-        return self.base_search(query_params)
