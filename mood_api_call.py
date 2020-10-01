@@ -111,14 +111,15 @@ valencels=list()
 energyls=list()
 idcheckls=list()
 for index2 in range(len(audioresponses)):
-    for index3 in range(len(audiosresponses[index2])):
-        valencels.append(audioresponses[index2]["audio_features"][index3]["valence"]
-        energyls.append(audioresponses[index2]["audio_features"][index3]["energy"]
-        idcheckls.append(audioresponses[index2]["audio_features"][index3]["id"]
+    for index3 in range(len(audioresponses[index2])):
+        valencels.append(audioresponses[index2]["audio_features"][index3]["valence"])
+        energyls.append(audioresponses[index2]["audio_features"][index3]["energy"])
+        idcheckls.append(audioresponses[index2]["audio_features"][index3]["id"])
                          
 valencedf= pd.DataFrame(valencels)
 energydf= pd.DataFrame(energyls)
 idcheckdf= pd.DataFrame(idcheckls)
 combineddf= pd.concat([valencedf, energydf, idcheckdf], axis=1, sort=False)
-combineddf.to_csv("mood_features.csv", index= False)
+combineddf.columns = ["Valence", "Energy", "ID Check"]
+combineddf.to_csv("all_mood_features.csv", index= False)
                          
