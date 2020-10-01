@@ -3,6 +3,7 @@
 
 import base64
 import datetime
+import time
 from urllib.parse import urlencode
 
 import requests
@@ -93,6 +94,9 @@ class SpotifyAPI(object):
 client_id= ""
 client_secret= ""
 
+start2= time.time()
+print("Clock started")
+
 client= SpotifyAPI(client_id, client_secret)
 client.get_client_credentials()
 client.get_token_headers()
@@ -122,4 +126,7 @@ idcheckdf= pd.DataFrame(idcheckls)
 combineddf= pd.concat([valencedf, energydf, idcheckdf], axis=1, sort=False)
 combineddf.columns = ["Valence", "Energy", "ID Check"]
 combineddf.to_csv("all_mood_features.csv", index= False)
-                         
+
+end2= time.time()
+print("Seconds: %.2f"
+      % (end2-start2))
