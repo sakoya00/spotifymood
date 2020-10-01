@@ -102,9 +102,7 @@ client.get_access_token()
 client.get_resource_header()
 
 audioresponses=list()
-for concatid in concatls:
-    #should "i" below actually be "concatid?"
-    audiojson= client.get_resource(batch_id=concatls[i])
+concatls_len= len(concatls)
+for index in range(concatls_len):
+    audiojson= client.get_resource(batch_id=concatls[index])
     audioresponses.append(audiojson)
-#i=0
-#client.get_resource(batch_id=concatls[i])
