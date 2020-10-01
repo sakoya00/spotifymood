@@ -37,5 +37,5 @@ def get_concat_query(k, concatls, concatpre):
 get_concat_query(k,concatls,concatpre)
 
 end=time.time()
-print(print("Seconds: %.2f"
+print("Seconds: %.2f"
       % (end-start))
