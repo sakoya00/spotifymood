@@ -115,7 +115,8 @@ valencels=list()
 energyls=list()
 idcheckls=list()
 for index2 in range(len(audioresponses)):
-    for index3 in range(len(audioresponses[index2])):
+    #for index3 in range(len(audioresponses[index2])):
+    for index3 in range(len(audioresponses[index2]["audio_features"])):
         valencels.append(audioresponses[index2]["audio_features"][index3]["valence"])
         energyls.append(audioresponses[index2]["audio_features"][index3]["energy"])
         idcheckls.append(audioresponses[index2]["audio_features"][index3]["id"])
