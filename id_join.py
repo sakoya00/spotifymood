@@ -29,6 +29,7 @@ def get_concat_query(k, concatls, concatpre):
                 concatls.append(joined)
                 concatpre=[]
         k=k+1
+get_concat_query(k,concatls,concatpre)
 #songidcol= pd.DataFrame(df, columns= ["Song ID"])
 #n= 50
 #songidsub= [ songidcol[i:i+n] for i in range(0, len(songidcol), n) ]
