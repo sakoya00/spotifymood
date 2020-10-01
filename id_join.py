@@ -1,9 +1,14 @@
 import chardet
+import time
 import csv
 import ast
 import requests
 import json
 import pandas as pd
+
+start= time.time()
+print("Clock started")
+
 with open("spmooddata.csv", 'rb') as rawdata:
     result = chardet.detect(rawdata.read(100000))
 result
@@ -30,6 +35,7 @@ def get_concat_query(k, concatls, concatpre):
                 concatpre=[]
         k=k+1
 get_concat_query(k,concatls,concatpre)
-#songidcol= pd.DataFrame(df, columns= ["Song ID"])
-#n= 50
-#songidsub= [ songidcol[i:i+n] for i in range(0, len(songidcol), n) ]
+
+end=time.time()
+print(print("Seconds: %.2f"
+      % (end-start))
