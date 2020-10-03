@@ -8,6 +8,7 @@
 library(dplyr)
 library(tibble)
 library(streamgraph)
+library(tidyverse)
 library(lubridate)
 library(readr)
 library(hablar)
@@ -15,3 +16,9 @@ spmood1 <- read.csv(file= "combined_spmood.csv")
 spmood1tib <- as_tibble(spmood1)
 spmood1tib %>%
   convert(dte(Chart_Date))
+spmood2tib <- spmood1tib %>%
+  group_by(Chart_Date)%>%
+  summarize(min_val=min(Valence),q1_val=quantile(Valence, .25),
+  median_val=median(Valence),q3_val=quantile(Valence,.75),max_val=max(Valence), min_energy=min(Energy),q1_energy=quantile(Energy,.25),
+  median_energy=median(Energy),q3_energy=quantile(Energy,.75),
+  max_energy=max(Energy))
