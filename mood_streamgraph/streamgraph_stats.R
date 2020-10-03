@@ -4,10 +4,14 @@
 
 #setwd("D:/immersion/spotify mood")
 #devtools::install_github("hrbrmstr/streamgraph")
+#install.packages("hablar")
 library(dplyr)
 library(tibble)
 library(streamgraph)
 library(lubridate)
 library(readr)
+library(hablar)
 spmood1 <- read.csv(file= "combined_spmood.csv")
 spmood1tib <- as_tibble(spmood1)
+spmood1tib %>%
+  convert(dte(Chart_Date))
