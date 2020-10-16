@@ -23,3 +23,5 @@ spmood2tib <- spmood1tib %>%
   median_val=median(Valence),q3_val=quantile(Valence,.75),max_val=max(Valence), min_energy=min(Energy),q1_energy=quantile(Energy,.25),
   median_energy=median(Energy),q3_energy=quantile(Energy,.75),
   max_energy=max(Energy))
+
+as.POSIXct(data, format= "%m/%d/%Y"))
