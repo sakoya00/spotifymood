@@ -1,6 +1,7 @@
 #Streamgraph will be used to show ratios for various statistics (mean, quartiles, etc) for valence and energy. 
 #The different statistics will be stacked in each distribution.
 #Valence will be on one side of the baseline (x-axis) and energy on the other.
+#4 streamgraphs for each quarterly period. Then radial graphs for interesting weeks.
 
 #setwd("D:/immersion/spotify mood")
 #devtools::install_github("hrbrmstr/streamgraph")
