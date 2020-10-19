@@ -82,5 +82,23 @@ q1_energy_out <- adjOutl(q1_energy)
 q1_energy_out_arr <- grep("FALSE", q1_energy_out$flagX)
 #12/24/19, 12/25/19
 
+med_e <- read.csv("median_energy.csv")
+med_e_out <- adjOutl(med_e)
+med_e_out_arr <- grep("FALSE", med_e_out$flagX)
+#No outliers
+
+q3_energy <- read.csv("q3_energy.csv")
+q3_energy_out <- adjOutl(q3_energy)
+q3_energy_out_arr <- grep("FALSE", q3_energy_out$flagX)
+#12/24/19, 12/25/19
+
+max_energy <- read.csv("max_energy.csv")
+max_energy_out <- adjOutl(max_energy)
+max_energy_out_arr <- grep("FALSE", max_energy_out_arr$flagX)
+#[1]  12  13  15  16  17  18  19  20  21  22  23  24  27  28  29  30
+#[17]  31  32  33  34  35  36  37  38  40  41  42  44  45  46  47  48
+#[33]  49  50  51  52  53  54  55  56  57  58  59  60  61  62  63  64
+#[49]  65  66  67 205 206 207 208 268 269 313 314 337
+
 
 
