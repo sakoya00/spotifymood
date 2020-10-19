@@ -31,3 +31,4 @@ spmood2tib <- spmood1tib %>%
   median_energy=median(Energy),q3_energy=quantile(Energy,.75),
   max_energy=max(Energy))
 
+#Mutating in Excel to move data into 3 columns- value, key [type of statistic], and date
