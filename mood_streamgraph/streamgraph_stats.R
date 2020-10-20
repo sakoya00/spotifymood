@@ -70,6 +70,7 @@ min_energy_out <- adjOutl(min_energy)
 min_energy_out <- adjOutl(min_energy)
 #Error: A direction was found for which the robust scale estimate equals zero. See the help page for more details. 
 min_energy_out_arr <- grep("TRUE", min_energy_out_arr$inSubspace)
+#possibly can't be computed
 #[1]  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  34
 #[17]  35  36  40  41  42  43  54  55  56  57  65  81  82  89  90  91
 #[33] 103 104 105 107 108 109 111 112 113 116 117 119 120 185 199 205
